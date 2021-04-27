@@ -1,0 +1,165 @@
+Classfile /F:/learning/javacourse/01jvm/src/main/java/Average.class
+  Last modified 2021-4-26; size 894 bytes
+  MD5 checksum 2a9637d1b35ee60ec5ef1f4dfb48e33d
+  Compiled from "Average.java"
+public class Average
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #6.#34         // java/lang/Object."<init>":()V
+   #2 = Float              20.0f
+   #3 = Fieldref           #11.#35        // Average.nums:[F
+   #4 = Fieldref           #36.#37        // java/lang/System.out:Ljava/io/PrintStream;
+   #5 = String             #38            // result : %f
+   #6 = Class              #39            // java/lang/Object
+   #7 = Methodref          #40.#41        // java/lang/Float.valueOf:(F)Ljava/lang/Float;
+   #8 = Methodref          #42.#43        // java/io/PrintStream.printf:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+   #9 = Float              7.0f
+  #10 = Float              9.0f
+  #11 = Class              #44            // Average
+  #12 = Utf8               nums
+  #13 = Utf8               [F
+  #14 = Utf8               <init>
+  #15 = Utf8               ()V
+  #16 = Utf8               Code
+  #17 = Utf8               LineNumberTable
+  #18 = Utf8               LocalVariableTable
+  #19 = Utf8               this
+  #20 = Utf8               LAverage;
+  #21 = Utf8               main
+  #22 = Utf8               ([Ljava/lang/String;)V
+  #23 = Utf8               num
+  #24 = Utf8               F
+  #25 = Utf8               args
+  #26 = Utf8               [Ljava/lang/String;
+  #27 = Utf8               a
+  #28 = Utf8               StackMapTable
+  #29 = Class              #26            // "[Ljava/lang/String;"
+  #30 = Class              #13            // "[F"
+  #31 = Utf8               <clinit>
+  #32 = Utf8               SourceFile
+  #33 = Utf8               Average.java
+  #34 = NameAndType        #14:#15        // "<init>":()V
+  #35 = NameAndType        #12:#13        // nums:[F
+  #36 = Class              #45            // java/lang/System
+  #37 = NameAndType        #46:#47        // out:Ljava/io/PrintStream;
+  #38 = Utf8               result : %f
+  #39 = Utf8               java/lang/Object
+  #40 = Class              #48            // java/lang/Float
+  #41 = NameAndType        #49:#50        // valueOf:(F)Ljava/lang/Float;
+  #42 = Class              #51            // java/io/PrintStream
+  #43 = NameAndType        #52:#53        // printf:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+  #44 = Utf8               Average
+  #45 = Utf8               java/lang/System
+  #46 = Utf8               out
+  #47 = Utf8               Ljava/io/PrintStream;
+  #48 = Utf8               java/lang/Float
+  #49 = Utf8               valueOf
+  #50 = Utf8               (F)Ljava/lang/Float;
+  #51 = Utf8               java/io/PrintStream
+  #52 = Utf8               printf
+  #53 = Utf8               (Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+{
+  public Average();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+      LineNumberTable:
+        line 7: 0
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+            0       5     0  this   LAverage;
+
+  public static void main(java.lang.String[]);
+    descriptor: ([Ljava/lang/String;)V
+    flags: ACC_PUBLIC, ACC_STATIC
+    Code:
+      stack=7, locals=6, args_size=1
+         0: ldc           #2                  // float 20.0f
+         2: fstore_1
+         3: getstatic     #3                  // Field nums:[F
+         6: astore_2
+         7: aload_2
+         8: arraylength
+         9: istore_3
+        10: iconst_0
+        11: istore        4
+        13: iload         4
+        15: iload_3
+        16: if_icmpge     36
+        19: aload_2
+        20: iload         4
+        22: faload
+        23: fstore        5
+        25: fload_1
+        26: fload         5
+        28: fadd
+        29: fstore_1
+        30: iinc          4, 1
+        33: goto          13
+        36: getstatic     #4                  // Field java/lang/System.out:Ljava/io/PrintStream;
+        39: ldc           #5                  // String result : %f
+        41: iconst_1
+        42: anewarray     #6                  // class java/lang/Object
+        45: dup
+        46: iconst_0
+        47: fload_1
+        48: getstatic     #3                  // Field nums:[F
+        51: arraylength
+        52: i2f
+        53: fdiv
+        54: invokestatic  #7                  // Method java/lang/Float.valueOf:(F)Ljava/lang/Float;
+        57: aastore
+        58: invokevirtual #8                  // Method java/io/PrintStream.printf:(Ljava/lang/String;[Ljava/lang/Object;)Ljava/io/PrintStream;
+        61: pop
+        62: return
+      LineNumberTable:
+        line 12: 0
+        line 13: 3
+        line 14: 25
+        line 13: 30
+        line 16: 36
+        line 17: 62
+      LocalVariableTable:
+        Start  Length  Slot  Name   Signature
+           25       5     5   num   F
+            0      63     0  args   [Ljava/lang/String;
+            3      60     1     a   F
+      StackMapTable: number_of_entries = 2
+        frame_type = 255 /* full_frame */
+          offset_delta = 13
+          locals = [ class "[Ljava/lang/String;", float, class "[F", int, int ]
+          stack = []
+        frame_type = 248 /* chop */
+          offset_delta = 22
+
+  static {};
+    descriptor: ()V
+    flags: ACC_STATIC
+    Code:
+      stack=4, locals=0, args_size=0
+         0: iconst_3
+         1: newarray       float
+         3: dup
+         4: iconst_0
+         5: fconst_2
+         6: fastore
+         7: dup
+         8: iconst_1
+         9: ldc           #9                  // float 7.0f
+        11: fastore
+        12: dup
+        13: iconst_2
+        14: ldc           #10                 // float 9.0f
+        16: fastore
+        17: putstatic     #3                  // Field nums:[F
+        20: return
+      LineNumberTable:
+        line 9: 0
+}
+SourceFile: "Average.java"
