@@ -5,10 +5,6 @@
 |--main\
 |---java\
 |----indi.kurok1\
-|-----analysisByte\    #作业01目录
-|------Average.java    #java代码
-|------Average.class   #javac编译后结果
-|------Average.txt     #反编译Average.class后的输出结果
 |-----classloader\     #作业02目录
 |------MyClassLoader   #自定义类加载器
 |---resources
