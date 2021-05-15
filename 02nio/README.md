@@ -1,6 +1,6 @@
 ## 作业说明
 
-不同GC的总结: [GC总结](src/main/java/resources/GC Summary.md)
+不同GC的总结: [GC总结](src/main/resources/GC%20Summary.md)
 
 ### HttpServer分析
 
