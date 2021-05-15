@@ -20,8 +20,6 @@ import java.util.concurrent.*;
  */
 public class NioHttpServer {
 
-    private static final ExecutorService executorService = Executors.newFixedThreadPool(40);
-
     public static void main(String[] args) throws IOException {
         int port = 8084;
         //创建一个channel
@@ -36,13 +34,10 @@ public class NioHttpServer {
         Selector selector = Selector.open();
         //channel注册到选择器
         socketChannel.register(selector, SelectionKey.OP_ACCEPT);
-        //阻塞队列，存放异步结果
-        BlockingQueue<Future<?>> readableQueue = new ArrayBlockingQueue<>(40);
-        ForkJoinPool forkJoinPool = new ForkJoinPool(40);
         while (true) {
             //查询3秒内selector中被命中的事件
             if (selector.select(1000) == 0) {
-                //3秒没有接收到事件
+                //1秒内没有接收到事件
                 continue;
             }
 
