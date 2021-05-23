@@ -1,0 +1,3 @@
+indi.kurok1.gateway.outbound.netty.NettyHttpClient
+indi.kurok1.gateway.outbound.okhttp.HttpClientImpl
+

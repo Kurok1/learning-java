@@ -11,6 +11,7 @@
     <modules>
         <module>01jvm</module>
         <module>02nio</module>
+        <module>03gateway</module>
     </modules>
 
     <properties>

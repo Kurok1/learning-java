@@ -48,7 +48,7 @@ class HttpThread implements Runnable {
         StringBuffer response = new StringBuffer();
         response.append("HTTP/1.1 200 OK\n");
         response.append("Content-Type:text/html;charset=utf-8\n");
-        String body = "Hellp Http Server";
+        String body = "Hello Http Server";
         response.append("Content-Length:" + body.getBytes().length);
         response.append("\n\n");
         response.append(body);
