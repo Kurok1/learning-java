@@ -1,0 +1,30 @@
+#以非web的方式运行
+spring:
+    main:
+        web-application-type: none
+        
+gateway:
+    route:
+        -   serviceName: "application1"
+            ipAddress: 'localhost'
+            port: 8081
+        -   serviceName: "application2"
+            ipAddress: 'localhost'
+            port: 8082
+        -   serviceName: "application2"
+            ipAddress: 'localhost'
+            port: 8083
+        -   serviceName: "application2"
+            ipAddress: 'localhost'
+            port: 8084
+        -   serviceName: "application3"
+            ipAddress: 'localhost'
+            port: 8085
+        -   serviceName: "application4"
+            ipAddress: 'localhost'
+            port: 8086
+        -   serviceName: "application4"
+            ipAddress: 'localhost'
+            port: 8087
+    
+        

@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  indi.kurok1.starter.autoconfigure.ClassroomAutoConfiguration
+
+
+indi.kurok1.gateway.autoconfigure.EnableRequestFilter=\
+  indi.kurok1.gateway.filter.TokenHttpRequestFilter
+
+#indi.kurok1.gateway.autoconfigure.EnableResponseFilter
