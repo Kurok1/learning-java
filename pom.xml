@@ -22,6 +22,7 @@
         <module>03gateway</module>
         <module>04concurrent</module>
         <module>05spring</module>
+        <module>06database</module>
     </modules>
 
     <properties>
