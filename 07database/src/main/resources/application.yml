@@ -1,0 +1,46 @@
+database:
+    config:
+        enabled: false #true表示使用动态数据源
+        driverClassName: "com.mysql.cj.jdbc.Driver"
+        writeable:
+            jdbcUrl: "jdbc:mysql://localhost:3306/test_jdbc?serverTimezone=GMT%2B8"
+            password: "123qwertyA"
+            username: "root"
+        readOnly:
+            -   jdbcUrl: "jdbc:mysql://localhost:3316/test_jdbc?serverTimezone=GMT%2B8"
+                password: "123qwertyA"
+                username: "root"
+            -   jdbcUrl: "jdbc:mysql://localhost:3326/test_jdbc?serverTimezone=GMT%2B8"
+                password: "123qwertyA"
+                username: "root"
+                
+sharding:
+    jdbc:
+        dataSource:
+            names: db-master,db-slave0,db-slave1
+            # 配置主库
+            db-master: #org.apache.tomcat.jdbc.pool.DataSource
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://localhost:3306/test_jdbc?serverTimezone=GMT%2B8
+                username: root
+                password: '123qwertyA'
+            db-slave0: # 配置第一个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://localhost:3316/test_jdbc?serverTimezone=GMT%2B8
+                username: root
+                password: '123qwertyA'
+            db-slave1: # 配置第二个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://localhost:3326/test_jdbc?serverTimezone=GMT%2B8
+                username: root
+                password: '123qwertyA'
+        config:
+            masterslave: # 配置读写分离
+                load-balance-algorithm-type: round_robin # 配置从库选择策略，这里选择用轮询//random 随机 //round_robin 轮询
+                name: master-slave
+                master-data-source-name: db-master
+                slave-data-source-names: db-slave0,db-slave1
+        

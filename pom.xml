@@ -23,6 +23,7 @@
         <module>04concurrent</module>
         <module>05spring</module>
         <module>06database</module>
+        <module>07database</module>
     </modules>
 
     <properties>
