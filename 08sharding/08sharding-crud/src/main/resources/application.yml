@@ -1,0 +1,81 @@
+mysql:
+    databases: 2
+    tables-each-database: 4
+    slave0-order-0:
+        host: 47.107.166.121
+        port: 3316
+        database: order_0
+        username: "root"
+        password: "123456"
+    slave0-order-1:
+        host: 47.107.166.121
+        port: 3316
+        database: order_1
+        username: "root"
+        password: "123456"
+    slave1-order-0:
+        host: 47.107.166.121
+        port: 3326
+        database: order_0
+        username: "root"
+        password: "123456"
+    slave1-order-1:
+        host: 47.107.166.121
+        port: 3326
+        database: order_1
+        username: "root"
+        password: "123456"
+
+
+spring:
+    redis:
+        host: localhost
+        port: 6379
+        database: 0
+    shardingsphere:
+        sharding:
+            tables:
+                order_header:
+                    table-strategy:
+                        inline:
+                            sharding-column: "id"
+                            algorithm-expression: "order_header_$->{id % 4}"
+                    database-strategy:
+                        inline:
+                            sharding-column: "id"
+                            algorithm-expression: "db$->{id % 2}-slave$->{id % 2}"
+                    actual-data-nodes: db$->{0..1}-slave$->{0..1}.order_header_$->{0..3}
+                    key-generator:
+                        type: redis_auto_increment
+                        column: "id"
+            binding-tables: "order_header"
+        datasource:
+            names: db0-slave0,db0-slave1,db1-slave0,db1-slave1
+            # 配置分库信息
+            db0-slave0: # 配置第一个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://${mysql.slave0-order-0.host}:${mysql.slave0-order-0.port}/${mysql.slave0-order-0.database}?serverTimezone=GMT%2B8
+                username: ${mysql.slave0-order-0.username}
+                password: ${mysql.slave0-order-0.password}
+            db0-slave1: # 配置第一个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://${mysql.slave0-order-1.host}:${mysql.slave0-order-1.port}/${mysql.slave0-order-1.database}?serverTimezone=GMT%2B8
+                username: ${mysql.slave0-order-1.username}
+                password: ${mysql.slave0-order-1.password}
+            db1-slave0: # 配置第三个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://${mysql.slave1-order-0.host}:${mysql.slave1-order-0.port}/${mysql.slave1-order-0.database}?serverTimezone=GMT%2B8
+                username: ${mysql.slave1-order-0.username}
+                password: ${mysql.slave1-order-0.password}
+            db1-slave1: # 配置第四一个从库
+                type: com.zaxxer.hikari.HikariDataSource
+                driverClassName: com.mysql.cj.jdbc.Driver
+                jdbcUrl: jdbc:mysql://${mysql.slave1-order-1.host}:${mysql.slave1-order-1.port}/${mysql.slave1-order-1.database}?serverTimezone=GMT%2B8
+                username: ${mysql.slave1-order-1.username}
+                password: ${mysql.slave1-order-1.password}
+        props:
+            sql:
+                show: true

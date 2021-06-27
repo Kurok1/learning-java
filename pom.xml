@@ -24,11 +24,14 @@
         <module>05spring</module>
         <module>06database</module>
         <module>07database</module>
+        <module>08sharding</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <sharding.starter.version>4.1.1</sharding.starter.version>
+        <sharding.jdbc.core.starter.version>5.0.0-alpha</sharding.jdbc.core.starter.version>
     </properties>
 
 </project>
