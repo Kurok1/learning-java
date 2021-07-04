@@ -9,7 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>02nio</artifactId>
+    <artifactId>09rpc</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>rpcfx-core</module>
+        <module>rpcfx-demo-api</module>
+        <module>rpcfx-demo-consumer</module>
+        <module>rpcfx-demo-provider</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,8 +26,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
-            <artifactId>okhttp</artifactId>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
 
