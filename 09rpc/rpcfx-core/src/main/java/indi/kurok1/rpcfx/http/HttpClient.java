@@ -2,7 +2,6 @@ package indi.kurok1.rpcfx.http;
 
 import indi.kurok1.rpcfx.api.RpcfxRequest;
 import indi.kurok1.rpcfx.api.RpcfxResponse;
-import okhttp3.MediaType;
 
 /**
  * TODO
@@ -12,7 +11,6 @@ import okhttp3.MediaType;
  */
 public abstract class HttpClient {
 
-    public static final MediaType JSONTYPE = MediaType.get("application/json; charset=utf-8");
 
     public abstract RpcfxResponse post(RpcfxRequest req, String url);
 

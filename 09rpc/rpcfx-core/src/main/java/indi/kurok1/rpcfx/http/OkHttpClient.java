@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import indi.kurok1.rpcfx.api.RpcfxRequest;
 import indi.kurok1.rpcfx.api.RpcfxResponse;
 import indi.kurok1.rpcfx.client.RpcfxException;
+import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 
@@ -16,6 +17,8 @@ import java.io.IOException;
  * @version 2021.07.04
  */
 public class OkHttpClient extends HttpClient {
+
+    public static final MediaType JSONTYPE = MediaType.get("application/json; charset=utf-8");
 
     @Override
     public RpcfxResponse post(RpcfxRequest req, String url) {
