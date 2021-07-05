@@ -4,11 +4,14 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;
 import indi.kurok1.rpcfx.api.RpcfxRequest;
 import indi.kurok1.rpcfx.api.RpcfxResponse;
+import indi.kurok1.rpcfx.http.HttpClient;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.StringUtils;
 
@@ -22,6 +25,15 @@ import java.lang.reflect.Method;
  * @version 2021.07.04
  */
 public class RemoteServiceInterceptor implements MethodInterceptor {
+
+    private BeanFactory beanFactory;
+
+    private HttpClient httpClient;
+
+    public RemoteServiceInterceptor(BeanFactory beanFactory) {
+        this.beanFactory = beanFactory;
+        this.httpClient = this.beanFactory.getBean(HttpClient.class);
+    }
 
     static {
         ParserConfig.getGlobalInstance().addAccept("indi.kurok1");
@@ -50,6 +62,8 @@ public class RemoteServiceInterceptor implements MethodInterceptor {
         request.setParams(invocation.getArguments());
 
         RpcfxResponse response = post(request, remoteService.url());
+        if (response == null)
+            return null;
 
         // 加filter地方之三
         // Student.setTeacher("cuijing");
@@ -57,7 +71,7 @@ public class RemoteServiceInterceptor implements MethodInterceptor {
         // 这里判断response.status，处理异常
         // 考虑封装一个全局的RpcfxException
         try {
-            return JSON.parse(response.getResult().toString());
+            return response.getResult() == null ? null : JSON.parse(response.getResult().toString());
         } catch (Throwable t) {
             throw new RpcfxException(t);
         }
@@ -69,13 +83,15 @@ public class RemoteServiceInterceptor implements MethodInterceptor {
 
         // 1.可以复用client
         // 2.尝试使用httpclient或者netty client
-        OkHttpClient client = new OkHttpClient();
-        final Request request = new Request.Builder()
-                .url(url)
-                .post(RequestBody.create(JSONTYPE, reqJson))
-                .build();
-        String respJson = client.newCall(request).execute().body().string();
-        System.out.println("resp json: "+respJson);
-        return JSON.parseObject(respJson, RpcfxResponse.class);
+        //OkHttpClient client = new OkHttpClient();
+        //final Request request = new Request.Builder()
+        //        .url(url)
+        //        .post(RequestBody.create(JSONTYPE, reqJson))
+        //        .build();
+        //String respJson = client.newCall(request).execute().body().string();
+        //System.out.println("resp json: "+respJson);
+        //return JSON.parseObject(respJson, RpcfxResponse.class);
+
+        return this.httpClient.post(req, url);
     }
 }

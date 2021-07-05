@@ -8,10 +8,13 @@ import indi.kurok1.rpcfx.client.EnableRemoteService;
 import indi.kurok1.rpcfx.client.Rpcfx;
 import indi.kurok1.rpcfx.demo.api.User;
 import indi.kurok1.rpcfx.demo.api.UserService;
+import indi.kurok1.rpcfx.http.HttpClient;
+import indi.kurok1.rpcfx.http.NettyHttpClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
@@ -64,6 +67,11 @@ public class RpcfxClientApplication {
 			log.info("filter {} -> {}", this.getClass().getName(), request.toString());
 			return true;
 		}
+	}
+
+	@Bean
+	public HttpClient httpClient() {
+		return new NettyHttpClient();
 	}
 }
 

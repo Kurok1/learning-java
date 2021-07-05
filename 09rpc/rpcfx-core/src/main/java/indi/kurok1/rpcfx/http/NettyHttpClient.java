@@ -53,13 +53,14 @@ public class NettyHttpClient extends HttpClient {
             ChannelFuture f = b.connect(uri.getHost(), uri.getPort()).sync();
 
             String msg = JSON.toJSONString(req);
-            DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET,
-                    uri.toASCIIString(), Unpooled.wrappedBuffer(msg.getBytes("UTF-8")));
+            DefaultFullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.POST,
+                    uri.getPath(), Unpooled.wrappedBuffer(msg.getBytes("UTF-8")));
 
             // 构建http请求
             request.headers().set(HttpHeaderNames.HOST, uri.getHost());
             request.headers().set(HttpHeaderNames.CONNECTION, HttpHeaderValues.KEEP_ALIVE);
             request.headers().set(HttpHeaderNames.CONTENT_LENGTH, request.content().readableBytes());
+            request.headers().set(HttpHeaderNames.CONTENT_TYPE, HttpHeaderValues.APPLICATION_JSON);
             // 发送http请求
             f.channel().write(request);
             f.channel().flush();
@@ -68,9 +69,11 @@ public class NettyHttpClient extends HttpClient {
             latch.await(30, TimeUnit.SECONDS);
             return reference.get();
         } catch (Exception e) {
-            return null;
-        } finally {
-            workerGroup.shutdownGracefully();
+            RpcfxResponse rpcfxResponse = new RpcfxResponse();
+            rpcfxResponse.setResult(null);
+            rpcfxResponse.setStatus(false);
+            rpcfxResponse.setException(e);
+            return rpcfxResponse;
         }
     }
 
@@ -87,6 +90,16 @@ public class NettyHttpClient extends HttpClient {
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             if (msg instanceof FullHttpResponse) {
                 FullHttpResponse response = (FullHttpResponse) msg;
+                if (response.status().code() != 200) {
+                    RpcfxResponse rpcfxResponse = new RpcfxResponse();
+                    rpcfxResponse.setResult(null);
+                    rpcfxResponse.setStatus(false);
+                    reference.set(rpcfxResponse);
+                    latch.countDown();
+                    ctx.fireChannelRead(msg);
+                    ctx.disconnect().addListener(ChannelFutureListener.CLOSE);
+                    return;
+                }
                 //todo 过滤
 
 

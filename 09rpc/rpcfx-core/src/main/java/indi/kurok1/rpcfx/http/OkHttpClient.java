@@ -3,7 +3,6 @@ package indi.kurok1.rpcfx.http;
 import com.alibaba.fastjson.JSON;
 import indi.kurok1.rpcfx.api.RpcfxRequest;
 import indi.kurok1.rpcfx.api.RpcfxResponse;
-import indi.kurok1.rpcfx.client.RpcfxException;
 import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -36,7 +35,11 @@ public class OkHttpClient extends HttpClient {
         try {
             respJson = client.newCall(request).execute().body().string();
         } catch (IOException e) {
-            throw new RpcfxException(e);
+            RpcfxResponse rpcfxResponse = new RpcfxResponse();
+            rpcfxResponse.setResult(null);
+            rpcfxResponse.setStatus(false);
+            rpcfxResponse.setException(e);
+            return rpcfxResponse;
         }
         System.out.println("resp json: "+respJson);
         return JSON.parseObject(respJson, RpcfxResponse.class);

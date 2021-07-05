@@ -126,7 +126,7 @@ public class RemoteServiceRegistrar implements ImportBeanDefinitionRegistrar
                         result.setTarget(new Object());
                         Class clazz = Class.forName(classMetadata.getClassName());
                         result.setInterfaces(clazz);
-                        result.addAdvice(new RemoteServiceInterceptor());
+                        result.addAdvice(new RemoteServiceInterceptor(this.beanFactory));
 
                         Object repository = result.getProxy(this.classLoader);
                         //生成 BeanDefinition
