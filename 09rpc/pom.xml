@@ -17,11 +17,15 @@
         <module>rpcfx-demo-api</module>
         <module>rpcfx-demo-consumer</module>
         <module>rpcfx-demo-provider</module>
+        <module>dubbo-hmily-client</module>
+        <module>dubbo-hmily-service-provider</module>
+        <module>dubbo-hmily-commons-api</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <dubbo.version>2.7.12</dubbo.version>
     </properties>
 
     <dependencies>
@@ -30,5 +34,15 @@
             <artifactId>lombok</artifactId>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>indi.kurok1</groupId>
+                <artifactId>dubbo-hmily-commons-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
