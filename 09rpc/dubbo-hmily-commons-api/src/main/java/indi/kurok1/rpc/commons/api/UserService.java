@@ -1,4 +1,6 @@
-package indi.kurok1.rpc.hmily.commons.api;
+package indi.kurok1.rpc.commons.api;
+
+import indi.kurok1.rpc.commons.domain.User;
 
 /**
  * TODO
@@ -7,4 +9,7 @@ package indi.kurok1.rpc.hmily.commons.api;
  * @version 2021.07.06
  */
 public interface UserService {
+
+    User getById(Long id);
+
 }

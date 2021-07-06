@@ -8,22 +8,22 @@
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="order_service"/>
+    <dubbo:application name="account_service"/>
 
 
         <dubbo:registry protocol="zookeeper" address="localhost:2181"/>
 
-        <dubbo:protocol name="dubbo" port="20886"
+        <dubbo:protocol name="dubbo" port="20887"
                         server="netty" client="netty"
                         charset="UTF-8" threadpool="fixed" threads="500"
                         queues="0" buffer="8192" accepts="0" payload="8388608"/>
 
-        <dubbo:service interface="indi.kurok1.rpc.commons.api.UserService"
-                       ref="userService" executes="20"/>
+        <dubbo:service interface="indi.kurok1.rpc.commons.api.AccountService"
+                       ref="accountService" executes="20"/>
 
 
-    <!--    <dubbo:reference timeout="500000000"-->
-    <!--                     interface="org.dromara.hmily.demo.common.account.api.AccountService"-->
-    <!--                     id="accountService"-->
-    <!--                     retries="0" check="false" actives="20" loadbalance="hmilyRandom"/>-->
+        <dubbo:reference timeout="500000000"
+                         interface="indi.kurok1.rpc.commons.api.UserService"
+                         id="userService"
+                         retries="0" check="false" actives="20"/>
 </beans>

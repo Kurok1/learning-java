@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dubbo-hmily-user-service</artifactId>
+    <artifactId>dubbo-hmily-account-service</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

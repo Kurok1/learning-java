@@ -1,7 +1,8 @@
-package indi.kurok1.rpc.hmily.commons.domain;
+package indi.kurok1.rpc.commons.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -11,7 +12,7 @@ import java.math.BigDecimal;
  * @version 2021.07.06
  */
 @Data
-public class Account {
+public class Account implements Serializable {
 
     private Long id;
     private Long userId;

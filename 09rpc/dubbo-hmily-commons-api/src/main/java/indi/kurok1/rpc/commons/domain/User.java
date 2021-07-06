@@ -1,6 +1,8 @@
-package indi.kurok1.rpc.hmily.commons.domain;
+package indi.kurok1.rpc.commons.domain;
 
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * 用户
@@ -9,7 +11,7 @@ import lombok.Data;
  * @version 2021.07.06
  */
 @Data
-public class User {
+public class User implements Serializable {
 
     private Long id;
     private String code;

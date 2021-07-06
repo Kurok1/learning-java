@@ -13,16 +13,57 @@
     <packaging>pom</packaging>
     <modules>
         <module>dubbo-hmily-user-service</module>
+        <module>dubbo-hmily-account-service</module>
     </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <hmily.version>2.0.6-RELEASE</hmily.version>
+        <dubbo.version>2.6.5</dubbo.version>
     </properties>
 
 
+    <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>spring</artifactId>
+                        <groupId>org.springframework</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>dubbo-remoting-zookeeper</artifactId>
+                <version>${dubbo.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>indi.kurok1</groupId>
+                <artifactId>dubbo-hmily-commons-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.dromara</groupId>
@@ -53,6 +94,8 @@
                 <version>${mysql.version}</version>
             </dependency>
         </dependencies>
+    </dependencyManagement>
+
 
 
     <build>

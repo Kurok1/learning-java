@@ -1,7 +1,8 @@
-package indi.kurok1.rpc.hmily;
+package indi.kurok1.rpc.user;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ImportResource;
 
 /**
@@ -10,8 +11,8 @@ import org.springframework.context.annotation.ImportResource;
  * @author <a href="mailto:chan@ittx.com.cn">韩超</a>
  * @version 2021.07.06
  */
-@SpringBootApplication
-@ImportResource({"classpath:spring-dubbo.xml"})
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@ImportResource({"classpath:spring-dubbo.xml", "classpath:spring-hmily.xml"})
 public class UserServiceApplication {
 
     public static void main(String[] args) {
