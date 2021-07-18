@@ -8,7 +8,7 @@
        http://code.alibabatech.com/schema/dubbo
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="order_service"/>
+    <dubbo:application name="user_service"/>
 
 
         <dubbo:registry protocol="zookeeper" address="localhost:2181"/>
