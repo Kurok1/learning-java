@@ -27,6 +27,7 @@
         <module>08sharding</module>
         <module>09rpc</module>
         <module>10redis</module>
+        <module>11jms</module>
     </modules>
 
     <properties>
