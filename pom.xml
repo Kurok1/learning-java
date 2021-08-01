@@ -28,6 +28,7 @@
         <module>09rpc</module>
         <module>10redis</module>
         <module>11jms</module>
+        <module>12mq</module>
     </modules>
 
     <properties>

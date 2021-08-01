@@ -1,0 +1,12 @@
+kmq:
+    client:
+        serverAddress: localhost
+        port: 8080
+        queueLimits:
+            "topic": 1
+        queues:
+            - "topic"
+
+spring:
+    main:
+        web-application-type: none
