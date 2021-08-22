@@ -29,6 +29,7 @@
         <module>10redis</module>
         <module>11jms</module>
         <module>12mq</module>
+        <module>13summary</module>
     </modules>
 
     <properties>
